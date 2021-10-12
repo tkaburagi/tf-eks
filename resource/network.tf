@@ -9,21 +9,21 @@ resource "aws_vpc" "eks-vpc" {
 }
 
 resource "aws_subnet" "eks-subnet" {
-  count = 2
+  count                   = 2
   map_public_ip_on_launch = true
-  vpc_id     = aws_vpc.eks-vpc.id
-  cidr_block  = cidrsubnet(aws_vpc.eks-vpc.cidr_block, 8, count.index)
-  availability_zone = var.az[count.index]
+  vpc_id                  = aws_vpc.eks-vpc.id
+  cidr_block              = cidrsubnet(aws_vpc.eks-vpc.cidr_block, 8, count.index)
+  availability_zone       = var.az[count.index]
   tags = {
     "kubernetes.io/cluster/${var.cluster-name}" = "shared",
-    Name = "eks"
+    Name                                        = "eks"
   }
 }
 
 resource "aws_security_group" "eks-master" {
   name        = "eks-master-sg"
   description = "EKS master security group"
-  vpc_id = aws_vpc.eks-vpc.id
+  vpc_id      = aws_vpc.eks-vpc.id
 
   ingress {
     from_port   = 443
@@ -43,7 +43,7 @@ resource "aws_security_group" "eks-master" {
 resource "aws_security_group" "eks-node" {
   name        = "eks-node-sg"
   description = "EKS node security group"
-  vpc_id = aws_vpc.eks-vpc.id
+  vpc_id      = aws_vpc.eks-vpc.id
 
   ingress {
     description     = "Allow cluster master to access cluster node"
