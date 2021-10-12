@@ -3,7 +3,7 @@ variable "region" {
 }
 
 variable "k8s-version" {
-  default = "1.18"
+  default = "1.17"
 }
 
 variable "az" {
