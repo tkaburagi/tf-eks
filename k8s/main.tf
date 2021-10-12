@@ -3,9 +3,9 @@ terraform {
 }
 
 provider "kubernetes" {
-	host                   = data.eks.k8s-endpoint
-	cluster_ca_certificate = data.eks.k8s-cert
-	token                  = data.eks.token
+	host                   = data.terraform_remote_state.eks.k8s-endpoint
+	cluster_ca_certificate = data.terraform_remote_state.eks.k8s-cert
+	token                  = data.terraform_remote_state.eks.k8s-token
 }
 
 data "terraform_remote_state" "eks" {
