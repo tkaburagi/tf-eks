@@ -3,11 +3,15 @@ terraform {
 		organization = "tkaburagi"
 
 		workspaces {
-			name = "aws-eks"
+			name = "eks-resource"
 		}
 	}
 }
 
 provider "aws" {
 	region = var.region
+}
+
+data "aws_eks_cluster_auth" "auth" {
+	name = "auth"
 }
