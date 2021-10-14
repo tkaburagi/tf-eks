@@ -10,7 +10,6 @@ variable "az" {
   default = ["ap-northeast-1a", "ap-northeast-1c"]
 }
 
-
 variable "cluster-name" {
   default = "kabu-cluster"
 }

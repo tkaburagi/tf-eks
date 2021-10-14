@@ -1,13 +1,3 @@
-resource "aws_vpc" "eks-vpc" {
-  cidr_block = "10.0.0.0/16"
-  tags = {
-    Name = "eks",
-  }
-  enable_dns_hostnames = true
-  enable_dns_support   = true
-  instance_tenancy     = "default"
-}
-
 resource "aws_subnet" "eks-subnet" {
   count                   = 2
   map_public_ip_on_launch = true
@@ -18,6 +8,15 @@ resource "aws_subnet" "eks-subnet" {
     "kubernetes.io/cluster/${var.cluster-name}" = "shared",
     Name                                        = "eks"
   }
+}
+resource "aws_vpc" "eks-vpc" {
+  cidr_block = "10.0.0.0/16"
+  tags = {
+    Name = "eks",
+  }
+  enable_dns_hostnames = true
+  enable_dns_support   = true
+  instance_tenancy     = "default"
 }
 
 resource "aws_security_group" "eks-master" {
